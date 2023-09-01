@@ -121,25 +121,29 @@
 // ReactDOM.render(<FavoriteColor />, document.getElementById("root"));
 
 // useEffect
-// import { useState, useEffect } from "react";
-// import ReactDOM from "react-dom/client";
+import { useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
 
-// function Counter() {
-//   const [count, setCount] = useState(0);
-//   const [calculation, setCalculation] = useState(0);
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [calculation, setCalculation] = useState(0);
 
-//   useEffect(() => {
-//     setCalculation(() => count * 2);
-//   }, [count]); // <- add the count variable here
+  useEffect(() => {
+    setCalculation(() => count * 2);
+  }, [count]); // <- add the count variable here
 
-//   return (
-//     <>
-//       <p>Count: {count}</p>
-//       <button onClick={() => setCount((c) => c + 1)}>+</button>
-//       <p>Calculation: {calculation}</p>
-//     </>
-//   );
-// }
+  return (
+    <>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((c) => c + 1)}>+</button>
+      <p>Calculation: {calculation}</p>
+    </>
+  );
+}
+
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+root.render(<Counter />);
 
 // event handlers
 // import React, { useState } from "react";
@@ -828,51 +832,185 @@
 // root.render(<App />);
 
 // Fetch API Axios
-import React, { useState, useEffect } from "react";
-import { createRoot } from "react-dom/client";
-import axios from "axios";
+// import React, { useState, useEffect } from "react";
+// import { createRoot } from "react-dom/client";
+// import axios from "axios";
 
-function App() {
-  const [data, setData] = useState([]);
+// function App() {
+//   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const API_URL = "https://api.thecatapi.com/v1/breeds";
-    axios
-      .get(API_URL)
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+//   useEffect(() => {
+//     const API_URL = "https://api.thecatapi.com/v1/breeds";
+//     axios
+//       .get(API_URL)
+//       .then((response) => {
+//         setData(response.data);
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   }, []);
 
-  const renderCats = () => {
-    return data.map((cat) => {
-      console.log(cat);
-      return (
-        <div>
-          <div>
-            <h1>{cat.name}</h1>
-            <p>Description: {cat.description}</p>
-            <p>Origin: {cat.origin}</p>
-          </div>
-        </div>
-      );
-    });
-  };
+//   const renderCats = () => {
+//     return data.map((cat) => {
+//       console.log(cat);
+//       return (
+//         <div>
+//           <div>
+//             <h1>{cat.name}</h1>
+//             <p>Description: {cat.description}</p>
+//             <p>Origin: {cat.origin}</p>
+//           </div>
+//         </div>
+//       );
+//     });
+//   };
 
-  return (
-    <div className="App">
-      <h1>Fetching Data Using Axios</h1>
-      <div>
-        <p>There are {data.length} cats in the API</p>
-        <div className="countries-wrapper">{renderCats()}</div>
-      </div>
-    </div>
-  );
-}
+//   return (
+//     <div className="App">
+//       <h1>Fetching Data Using Axios</h1>
+//       <div>
+//         <p>There are {data.length} cats in the API</p>
+//         <div className="countries-wrapper">{renderCats()}</div>
+//       </div>
+//     </div>
+//   );
+// }
 
-const rootElement = document.getElementById("root");
-const root = createRoot(rootElement);
-root.render(<App />);
+// const rootElement = document.getElementById("root");
+// const root = createRoot(rootElement);
+// root.render(<App />);
+
+// React hooks
+// import React, { useState } from "react";
+// import ReactDOM from "react-dom";
+
+// const App = () => {
+//   // Declaring new state variable
+//   const [count, setCount] = useState(0);
+
+//   return (
+//     <div className="App">
+//       <h1>{count} </h1>
+//       <button onClick={() => setCount(count + 1)}>Add One</button>
+//       <button onClick={() => setCount(count - 1)}>Remove One</button>
+//     </div>
+//   );
+// };
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
+// import React, { useState } from "react";
+// import ReactDOM from "react-dom";
+
+// const App = () => {
+//   // Declaring new state variable
+//   const [count, setCount] = useState(0);
+//   const addOne = () => {
+//     let value = count + 1;
+//     setCount(value);
+//   };
+//   const minusOne = () => {
+//     let value = count - 1;
+//     setCount(value);
+//   };
+//   return (
+//     <div className="App">
+//       <h1>{count} </h1>
+//       <button onClick={addOne}>Add One</button>{" "}
+//       <button onClick={minusOne}>Minus One</button>
+//     </div>
+//   );
+// };
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
+
+// import React, { useState } from "react";
+// import ReactDOM from "react-dom";
+// const App = () => {
+//   // declaring state
+//   const url =
+//     "https://www.smithsstationah.com/imagebank/eVetSites/Feline/01.jpg";
+
+//   const [image, setImage] = useState(url);
+
+//   const changeAnimal = () => {
+//     let dogURL =
+//       "https://static.onecms.io/wp-content/uploads/sites/12/2015/04/dogs-pembroke-welsh-corgi-400x400.jpg";
+//     let catURL =
+//       "https://www.smithsstationah.com/imagebank/eVetSites/Feline/01.jpg";
+//     let result = image === catURL ? dogURL : catURL;
+//     setImage(result);
+//   };
+
+//   return (
+//     <div className="App">
+//       <h1>30 Days Of React</h1>
+//       <div className="animal">
+//         <img src={image} alt="animal" />
+//       </div>
+
+//       <button onClick={changeAnimal} class="btn btn-add">
+//         Change
+//       </button>
+//     </div>
+//   );
+// };
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
+
+// import { useState } from "react";
+// import ReactDOM from "react-dom/client";
+
+// function Car() {
+//   const [car, setCar] = useState({
+//     brand: "Ford",
+//     model: "Mustang",
+//     year: "1964",
+//     color: "red",
+//   });
+
+//   const updateColor = () => {
+//     setCar((previousState) => {
+//       return { ...previousState, color: "blue" };
+//     });
+//   };
+//   const updateYear = () => {
+//     setCar((previousState) => {
+//       return { ...previousState, year: 2000 };
+//     });
+//   };
+
+//   return (
+//     <>
+//       <h1>My {car.brand}</h1>
+//       <p>
+//         It is a {car.color} {car.model} from {car.year}.
+//       </p>
+//       <button type="button" onClick={updateColor}>
+//         Blue
+//       </button>
+//       <button onClick={updateYear}>Update year</button>
+//     </>
+//   );
+// }
+
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<Car />);
+
+// import { useState, useEffect } from "react";
+// import ReactDOM from "react-dom/client";
+
+// function Timer() {
+//   const [count, setCount] = useState(0);
+
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setCount((count) => count + 1);
+//     }, 1000);
+//   }, []);
+
+//   return <h1>I've rendered {count} times!</h1>;
+// }
+
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<Timer />);
