@@ -799,149 +799,30 @@
 // const root = createRoot(rootElement);
 // root.render(<App />);
 
-// import React from "react";
-// import { createRoot } from "react-dom/client";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Layout from "./pages/layout";
-// import Home from "./pages/home";
-// import Blogs from "./pages/blog";
-// import Contact from "./pages/contact";
-// import NoPage from "./pages/nopage";
-
-// export default function App() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<Layout />}>
-//           <Route index element={<Home />} />
-//           <Route path="blogs" element={<Blogs />} />
-//           <Route path="contact" element={<Contact />} />
-//           <Route path="*" element={<NoPage />} />
-//         </Route>
-//       </Routes>
-//     </BrowserRouter>
-//   );
-// }
-
-// const rootElement = document.getElementById("root");
-// const root = createRoot(rootElement);
-// root.render(<App />);
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  NavLink,
-} from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./pages/layout";
+import Home from "./pages/home";
+import Blogs from "./pages/blog";
+import Contact from "./pages/contact";
+import NoPage from "./pages/nopage";
 
-const Home = () => <h1>Welcome Home</h1>;
-
-const About = () => <h1>About Us</h1>;
-
-const Contact = () => <h1>Contact us</h1>;
-
-const challenges = [
-  {
-    name: "30 Days Of Python",
-    description:
-      "30 Days of Python challenge is a step by step guide to learn Python in 30 days.",
-    status: "completed",
-    days: 30,
-    level: "Beginners to Advanced",
-    duration: "20 Nov 2019 - 20 Dec 2019",
-    slug: "python",
-    url: "https://github.com/Asabeneh/30-Days-Of-Python",
-    author: {
-      firstName: "Asabeneh",
-      lastName: "Yetayeh",
-    },
-  },
-  // Add other challenges here
-];
-
-const Challenge = ({ challenge }) => (
-  <div>
-    <h1>{challenge.name}</h1>
-    <p>{challenge.level}</p>
-    <p>
-      Author: {challenge.author.firstName} {challenge.author.lastName}
-    </p>
-    {challenge.duration && (
-      <>
-        {" "}
-        <small>{challenge.duration}</small> <br />
-      </>
-    )}
-    <small>Number of days: {challenge.days}</small>
-
-    <p>{challenge.description}</p>
-  </div>
-);
-
-const Challenges = (props) => {
-  const path = props.location.pathname;
-  const slug = path.split("/").slice(-1)[0];
-  const challenge = challenges.find((challenge) => challenge.slug === slug);
-
+export default function App() {
   return (
-    <div>
-      <h1>30 Days Of React Challenge</h1>
-      <ul>
-        {challenges.map(({ name, slug }) => (
-          <li key={slug}>
-            <NavLink to={`/challenges/${slug}`}>{name}</NavLink>
-          </li>
-        ))}
-      </ul>
-      <Switch>
-        <Route
-          exact
-          path={"/challenges"}
-          component={() => <h1>Choose any of the challenges</h1>}
-        />
-        <Route
-          path={path}
-          render={(props) => <Challenge {...props} challenge={challenge} />}
-        />
-      </Switch>
-    </div>
-  );
-};
-
-const NotFound = () => <h1>The page you're looking for was not found</h1>;
-
-const Navbar = () => (
-  <ul>
-    <li>
-      <NavLink to="/">Home</NavLink>
-    </li>
-    <li>
-      <NavLink to="/about">About</NavLink>
-    </li>
-    <li>
-      <NavLink to="/contact">Contact</NavLink>
-    </li>
-    <li>
-      <NavLink to="/challenges">Challenges</NavLink>
-    </li>
-  </ul>
-);
-
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Switch>
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/challenges" component={Challenges} />
-          <Route exact path="/" component={Home} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App;
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+root.render(<App />);
