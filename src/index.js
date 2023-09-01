@@ -799,27 +799,77 @@
 // const root = createRoot(rootElement);
 // root.render(<App />);
 
-import React from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/layout";
-import Home from "./pages/home";
-import Blogs from "./pages/blog";
-import Contact from "./pages/contact";
-import NoPage from "./pages/nopage";
+// import React from "react";
+// import { createRoot } from "react-dom/client";
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import Layout from "./pages/layout";
+// import Home from "./pages/home";
+// import Blogs from "./pages/blog";
+// import Contact from "./pages/contact";
+// import NoPage from "./pages/nopage";
 
-export default function App() {
+// export default function App() {
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<Layout />}>
+//           <Route index element={<Home />} />
+//           <Route path="blogs" element={<Blogs />} />
+//           <Route path="contact" element={<Contact />} />
+//           <Route path="*" element={<NoPage />} />
+//         </Route>
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
+
+// const rootElement = document.getElementById("root");
+// const root = createRoot(rootElement);
+// root.render(<App />);
+
+// Fetch API Axios
+import React, { useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+import axios from "axios";
+
+function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const API_URL = "https://api.thecatapi.com/v1/breeds";
+    axios
+      .get(API_URL)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const renderCats = () => {
+    return data.map((cat) => {
+      console.log(cat);
+      return (
+        <div>
+          <div>
+            <h1>{cat.name}</h1>
+            <p>Description: {cat.description}</p>
+            <p>Origin: {cat.origin}</p>
+          </div>
+        </div>
+      );
+    });
+  };
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div className="App">
+      <h1>Fetching Data Using Axios</h1>
+      <div>
+        <p>There are {data.length} cats in the API</p>
+        <div className="countries-wrapper">{renderCats()}</div>
+      </div>
+    </div>
   );
 }
 
