@@ -121,29 +121,29 @@
 // ReactDOM.render(<FavoriteColor />, document.getElementById("root"));
 
 // useEffect
-import { useState, useEffect } from "react";
-import { createRoot } from "react-dom/client";
+// import { useState, useEffect } from "react";
+// import { createRoot } from "react-dom/client";
 
-function Counter() {
-  const [count, setCount] = useState(0);
-  const [calculation, setCalculation] = useState(0);
+// function Counter() {
+//   const [count, setCount] = useState(0);
+//   const [calculation, setCalculation] = useState(0);
 
-  useEffect(() => {
-    setCalculation(() => count * 2);
-  }, [count]); // <- add the count variable here
+//   useEffect(() => {
+//     setCalculation(() => count * 2);
+//   }, [count]); // <- add the count variable here
 
-  return (
-    <>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount((c) => c + 1)}>+</button>
-      <p>Calculation: {calculation}</p>
-    </>
-  );
-}
+//   return (
+//     <>
+//       <p>Count: {count}</p>
+//       <button onClick={() => setCount((c) => c + 1)}>+</button>
+//       <p>Calculation: {calculation}</p>
+//     </>
+//   );
+// }
 
-const rootElement = document.getElementById("root");
-const root = createRoot(rootElement);
-root.render(<Counter />);
+// const rootElement = document.getElementById("root");
+// const root = createRoot(rootElement);
+// root.render(<Counter />);
 
 // event handlers
 // import React, { useState } from "react";
@@ -1014,3 +1014,130 @@ root.render(<Counter />);
 
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(<Timer />);
+
+// context hook
+// import { useState, createContext, useContext } from "react";
+// import ReactDOM from "react-dom/client";
+
+// const UserContext = createContext();
+
+// function Component1() {
+//   const [user, setUser] = useState("Jesse Hall");
+
+//   return (
+//     <UserContext.Provider value={user}>
+//       <h1>{`Hello ${user}!`}</h1>
+//       <Component2 />
+//     </UserContext.Provider>
+//   );
+// }
+
+// function Component2() {
+//   return (
+//     <>
+//       <h1>Component 2</h1>
+//       <Component3 />
+//     </>
+//   );
+// }
+
+// function Component3() {
+//   return (
+//     <>
+//       <h1>Component 3</h1>
+//       <Component4 />
+//     </>
+//   );
+// }
+
+// function Component4() {
+//   return (
+//     <>
+//       <h1>Component 4</h1>
+//       <Component5 />
+//     </>
+//   );
+// }
+
+// function Component5() {
+//   const user = useContext(UserContext);
+
+//   return (
+//     <>
+//       <h1>Component 5</h1>
+//       <h2>{`Hello ${user} again!`}</h2>
+//     </>
+//   );
+// }
+
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<Component1 />);
+
+// to get input from form
+// import React, { useRef } from "react";
+// import ReactDOM from "react-dom";
+
+// const App = (props) => {
+//   const ref = useRef(null);
+//   const onClick = () => {
+//     let value = ref.current.value;
+//     alert(value);
+//   };
+//   return (
+//     <div className="App">
+//       <h1>How to use data from uncontrolled input using useRef</h1>
+//       <input type="text" ref={ref} />
+//       <br />
+//       <button onClick={onClick}>Get Input Data</button>
+//     </div>
+//   );
+// };
+
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
+
+// import React, { useRef } from "react";
+// import { createRoot } from "react-dom/client";
+
+// const App = () => {
+//   const ref = useRef(null);
+
+//   const onClick = () => {
+//     let value = ref.current.value;
+//     alert(value);
+//   };
+
+//   return (
+//     <div className="App">
+//       <h1>How to use data from uncontrolled input using useRef</h1>
+//       <input type="text" ref={ref} />
+//       <br />
+//       <button onClick={onClick}>Get Input Data</button>
+//     </div>
+//   );
+// };
+
+// const rootElement = document.getElementById("root");
+// const root = createRoot(rootElement);
+// root.render(<App />);
+
+import React, { useRef } from "react";
+import ReactDOM from "react-dom";
+
+const App = (props) => {
+  const ref = useRef(null);
+  const onClick = () => {
+    let content = ref.current.textContent;
+    alert(content);
+    console.log(content);
+  };
+  return (
+    <div className="App">
+      <h1 ref={ref}>How to getting content from the DOM tree</h1>
+      <button onClick={onClick}>Getting Content</button>
+    </div>
+  );
+};
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
